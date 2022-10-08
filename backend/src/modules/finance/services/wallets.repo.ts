@@ -20,7 +20,7 @@ export class WalletRepo {
   }
 
   async createOne(): Promise<WalletPrivatePublicKeyPair> {
-    await fetch(`${this.BLOCKCHAIN_BASE_URL}/`);
+    await fetch(`${this.BLOCKCHAIN_BASE_URL}/wallets/new`);
     return { privateKey: '', publicKey: '' };
   }
 }

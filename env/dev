@@ -25,8 +25,10 @@ export JWT_SECRET='[a0oej4rgip5g0aijefogpihn[4ijks;wk3f3ihgposldckdieselkwn5 vlk
 # It`s a part of salt for generating user private key hashes
 export USER_PRIVATE_KEY_HASH_SALT='[ijwefleskemdlckajsrnoe-]50w[4-g3q[4gi-0[wjeirgvsloij;b[-q304ihjilosekrgmoit;ehkgm zsj.dne,smjrmnf]]]]]'
 export INVITE_USERS_SIGN_KEY='kjnervlkjnsvirue92hjn34lkjbisdkjbfvo3uhejijfoewlscnm,vniejrnvdkfvb ouerif938h4fu8oijw3opqihefnkawjnel'
-export ROOT_WALLET_PRIVATE_KEY='f65eb3320a3e9dd51eaf2d67d71e609459081cf63aefd32fda79c425c296f257'
-export ROOT_WALLET_PUBLIC_KEY='0x15Cc4abzz27647ec9fE70D892E55586074263dF0'
+
+# I know it is insecure, but who cares
+export ROOT_WALLET_PRIVATE_KEY='2fffc906e5065240f2d143c75f49bcf2b9b2046a7c17ac7f99af664c5000617c'
+export ROOT_WALLET_PUBLIC_KEY='0x1D996a20F1c65a93D23BDa271F5186aca3b77caf'
 export BLOCKCHAIN_BASE_URL='https://hackathon.lsp.team/hk/v1'
 
 export MOCK_SCRIPT_NAME='fillDBScript'

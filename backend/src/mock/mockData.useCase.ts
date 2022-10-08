@@ -35,13 +35,15 @@ export class MockDataUseCase {
       type: AccessScopeType.SYSTEM_ADMIN,
     });
 
-    const { user } = await this.userUseCase.createUser({
-      email: 'asd@asd.asd',
-      lastName: 'Такой-тов',
-      firstName: 'Такой-то',
-      patronymic: 'Такой-тович',
-      gender: 'male',
-    });
+    const { user, walletPrivatePublicKeyPair } =
+      await this.userUseCase.createUser({
+        email: 'asd@asd.asd',
+        lastName: 'Такой-тов',
+        firstName: 'Такой-то',
+        patronymic: 'Такой-тович',
+        gender: 'male',
+      });
+    console.log('walletPrivatePublicKeyPair: ', walletPrivatePublicKeyPair);
 
     await this.accessScopeRepo.updateOneWithRelations({
       id: systemAdminScope.id,
