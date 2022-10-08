@@ -42,7 +42,6 @@ export class MockDataUseCase {
       firstName: 'Такой-то',
       patronymic: 'Такой-тович',
       gender: 'male',
-      password: 'asdasdasd',
     });
 
     await this.accessScopeRepo.updateOneWithRelations({

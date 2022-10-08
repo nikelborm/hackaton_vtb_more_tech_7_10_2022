@@ -20,7 +20,7 @@ export class AuthController {
   async login(
     // leave here for documentation generation
     @Query('email') email: string,
-    @Query('password') password: string,
+    @Query('privateKey') privateKey: string,
     @Request() req: { user: UserAuthInfo },
   ): Promise<TokenPairDTO> {
     return await this.authUseCase.login(req.user);

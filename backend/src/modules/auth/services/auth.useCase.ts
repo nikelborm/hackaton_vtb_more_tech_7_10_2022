@@ -20,7 +20,7 @@ import { UserUseCase } from 'src/modules/user';
 
 @Injectable()
 export class AuthUseCase {
-  private USER_PASSWORD_HASH_SALT: string;
+  private USER_PRIVATE_KEY_HASH_SALT: string;
 
   constructor(
     private readonly accessTokenUseCase: AccessTokenUseCase,
@@ -30,28 +30,28 @@ export class AuthUseCase {
     private readonly configService: ConfigService<IAppConfigMap, true>,
     private readonly whitelistedSessionStore: InMemoryWhitelistedSessionStore,
   ) {
-    this.USER_PASSWORD_HASH_SALT = this.configService.get(
-      ConfigKeys.USER_PASSWORD_HASH_SALT,
+    this.USER_PRIVATE_KEY_HASH_SALT = this.configService.get(
+      ConfigKeys.USER_PRIVATE_KEY_HASH_SALT,
     );
   }
 
   async validateLoginAttempt(
     userModel: UserForLoginAttemptValidation,
-    password: string,
+    privateKey: string,
   ): Promise<void> {
-    const { passwordHash, salt } = userModel;
+    const { privateKeyHash, salt } = userModel;
 
-    const isPasswordCorrect = timingSafeEqual(
-      Buffer.from(passwordHash, 'hex'),
+    const isPrivateKeyCorrect = timingSafeEqual(
+      Buffer.from(privateKeyHash, 'hex'),
       createHash('sha256')
         .update(salt)
-        .update(password)
-        .update(this.USER_PASSWORD_HASH_SALT)
+        .update(privateKey)
+        .update(this.USER_PRIVATE_KEY_HASH_SALT)
         .digest(),
     );
 
-    if (!isPasswordCorrect)
-      throw new UnauthorizedException(messages.auth.incorrectPassword);
+    if (!isPrivateKeyCorrect)
+      throw new UnauthorizedException(messages.auth.incorrectPrivateKey);
 
     // if (!userModel.accessScopes.length)
     //   throw new UnauthorizedException(messages.auth.userHasNoAccessScopes);

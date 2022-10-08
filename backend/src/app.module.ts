@@ -11,6 +11,7 @@ import {
   InfrastructureModule,
   UserModule,
   AccessScopeModule,
+  NFTModule,
 } from './modules';
 
 @Module({
@@ -23,6 +24,7 @@ import {
 
     InfrastructureModule,
     AccessScopeModule,
+    NFTModule,
     AuthModule,
     UserModule,
   ],

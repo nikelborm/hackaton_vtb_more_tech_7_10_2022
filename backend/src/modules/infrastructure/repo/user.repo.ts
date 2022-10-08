@@ -111,7 +111,7 @@ export class UserRepo {
     return await updateOnePlain<User, 'id'>(this.repo, updatedUser);
   }
 
-  async findOneByEmailWithAccessScopesAndPassword(
+  async findOneByEmailWithAccessScopesAndPrivateKey(
     email: string,
   ): Promise<UserForLoginAttemptValidation> {
     const user = await this.repo
@@ -127,7 +127,7 @@ export class UserRepo {
         'user.phone',
         // 'user.telegram',
         'user.salt',
-        'user.passwordHash',
+        'user.privateKeyHash',
         'accessScopes.id',
         'accessScopes.type',
       ])

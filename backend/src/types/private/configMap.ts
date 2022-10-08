@@ -9,10 +9,13 @@ export type IAppConfigMap = {
   [ConfigKeys.IS_PRODUCTION]: boolean;
   [ConfigKeys.MOCK_SCRIPT_NAME]: Exclude<keyof MockDataUseCase, 'executeMock'>;
   [ConfigKeys.JWT_SECRET]: string;
-  [ConfigKeys.USER_PASSWORD_HASH_SALT]: string;
+  [ConfigKeys.USER_PRIVATE_KEY_HASH_SALT]: string;
   [ConfigKeys.SERVER_PORT]: number;
   [ConfigKeys.WEB_SOCKET_SERVER_PORT]: number;
   [ConfigKeys.INVITE_USERS_SIGN_KEY]: string;
+  [ConfigKeys.ROOT_WALLET_PRIVATE_KEY]: string;
+  [ConfigKeys.ROOT_WALLET_PUBLIC_KEY]: string;
+  [ConfigKeys.BLOCKCHAIN_BASE_URL]: string;
 };
 
 export type IDatabaseConfigMap = {

@@ -16,8 +16,13 @@ export const appConfig: () => IAppConfigMap = () => ({
     'executeMock'
   >,
   [ConfigKeys.JWT_SECRET]: process.env.JWT_SECRET as string,
-  [ConfigKeys.USER_PASSWORD_HASH_SALT]: process.env
-    .USER_PASSWORD_HASH_SALT as string,
+  [ConfigKeys.USER_PRIVATE_KEY_HASH_SALT]: process.env
+    .USER_PRIVATE_KEY_HASH_SALT as string,
   [ConfigKeys.INVITE_USERS_SIGN_KEY]: process.env
     .INVITE_USERS_SIGN_KEY as string,
+  [ConfigKeys.ROOT_WALLET_PRIVATE_KEY]: process.env
+    .ROOT_WALLET_PRIVATE_KEY as string,
+  [ConfigKeys.ROOT_WALLET_PUBLIC_KEY]: process.env
+    .ROOT_WALLET_PUBLIC_KEY as string,
+  [ConfigKeys.BLOCKCHAIN_BASE_URL]: process.env.BLOCKCHAIN_BASE_URL as string,
 });

@@ -9,7 +9,7 @@ const messagesRepeating = {
 export const messages = {
   auth: {
     incorrectUser: 'User with this email was not found',
-    incorrectPassword: 'Incorrect password',
+    incorrectPrivateKey: 'Incorrect private key',
     userHasNoAccessScopes:
       'This user has no access scopes. The user is not assigned to any access scope and has no additional role. Please contact the administrator',
     developmentOnly: 'Development only',

@@ -11,7 +11,7 @@ export class Initial1665235648266 implements MigrationInterface {
         "last_name" character varying NOT NULL,
         "email" character varying NOT NULL,
         "salt" character varying NOT NULL,
-        "password_hash" character varying NOT NULL,
+        "private_key_hash" character varying NOT NULL,
         "patronymic" character varying NOT NULL,
         "gender" character varying NOT NULL,
         "phone" character varying(15),

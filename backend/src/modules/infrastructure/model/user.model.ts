@@ -42,11 +42,11 @@ export class User {
   salt!: string;
 
   @Column({
-    name: 'password_hash',
+    name: 'private_key_hash',
     select: false,
     nullable: false,
   })
-  passwordHash!: string;
+  privateKeyHash!: string;
 
   @ManyToMany(
     () => AccessScope,

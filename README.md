@@ -23,8 +23,6 @@ yarn psql
 
 ## TODO
 
-[ ] password recovery|reset
-
 [ ] connect testing libraries
 
 [ ] Add vs code extensions recomendations

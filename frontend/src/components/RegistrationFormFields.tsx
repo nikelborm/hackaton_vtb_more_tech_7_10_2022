@@ -1,37 +1,11 @@
-import { LockOutlined, SmileOutlined, UserOutlined } from '@ant-design/icons';
+import { SmileOutlined, UserOutlined } from '@ant-design/icons';
 import { Form, Input } from 'antd';
-import { LoginFormFields } from './LoginFormFields';
+import { EmailFormField } from './LoginFormFields';
 
 export function RegistrationFormFields() {
   return (
     <>
-      <LoginFormFields />
-      <Form.Item
-        name="confirm"
-        label="Confirm Password"
-        dependencies={['password']}
-        hasFeedback
-        rules={[
-          {
-            required: true,
-            message: 'Please confirm your password!',
-          },
-          ({ getFieldValue }) => ({
-            validator(_, value) {
-              if (!value || getFieldValue('password') === value) {
-                return Promise.resolve();
-              }
-              return Promise.reject(new Error('Passwords does not match!'));
-            },
-          }),
-        ]}
-      >
-        <Input.Password
-          prefix={<LockOutlined />}
-          placeholder="***********"
-          spellCheck={false}
-        />
-      </Form.Item>
+      <EmailFormField />
       <Form.Item
         name="firstName"
         label="First name"

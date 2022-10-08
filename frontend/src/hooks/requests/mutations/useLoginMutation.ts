@@ -5,7 +5,7 @@ import { TokenPairDTO } from 'backendTypes';
 export function useLoginMutation() {
   const { updateTokenPair } = useTokenPairUpdater();
   const { mutate, isLoading, isError, isSuccess } = useMutation(
-    (credentials: { email: string; password: string }) =>
+    (credentials: { email: string; privateKey: string }) =>
       customFetch<TokenPairDTO>('auth/local/login', {
         method: 'POST',
         needsAccessToken: false,

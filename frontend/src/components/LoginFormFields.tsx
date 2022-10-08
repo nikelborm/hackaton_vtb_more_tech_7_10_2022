@@ -4,24 +4,14 @@ import { LockOutlined, MailOutlined } from '@ant-design/icons';
 export function LoginFormFields() {
   return (
     <>
+      <EmailFormField />
       <Form.Item
-        name="email"
-        label="Email"
-        rules={[{ type: 'email' }, { type: 'string', min: 7, required: true }]}
-      >
-        <Input
-          prefix={<MailOutlined />}
-          placeholder="user@mail.ru"
-          spellCheck={false}
-        />
-      </Form.Item>
-      <Form.Item
-        name="password"
-        label="Password"
+        name="privateKey"
+        label="Private key"
         rules={[
           {
             required: true,
-            message: 'Please input your password!',
+            message: 'Please input your private key!',
           },
           { type: 'string', min: 8 },
         ]}
@@ -34,5 +24,21 @@ export function LoginFormFields() {
         />
       </Form.Item>
     </>
+  );
+}
+
+export function EmailFormField() {
+  return (
+    <Form.Item
+      name="email"
+      label="Email"
+      rules={[{ type: 'email' }, { type: 'string', min: 7, required: true }]}
+    >
+      <Input
+        prefix={<MailOutlined />}
+        placeholder="user@mail.ru"
+        spellCheck={false}
+      />
+    </Form.Item>
   );
 }

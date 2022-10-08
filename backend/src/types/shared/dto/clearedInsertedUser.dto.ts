@@ -1,4 +1,4 @@
-export class ClearedInsertedUserDTO implements Omit<InputUser, 'password'> {
+export class ClearedInsertedUserDTO implements Omit<InputUser, 'privateKey'> {
   id!: number;
 
   firstName!: string;
@@ -18,5 +18,5 @@ export interface InputUser {
   patronymic: string;
   gender: string;
   email: string;
-  password: string;
+  privateKey: string;
 }

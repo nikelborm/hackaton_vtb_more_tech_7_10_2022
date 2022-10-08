@@ -1,4 +1,4 @@
-import { Get, Post, Query, Req } from '@nestjs/common';
+import { Get, Post, Query } from '@nestjs/common';
 import { UserUseCase } from './user.useCase';
 import {
   CreateUserDTO,
@@ -8,10 +8,8 @@ import {
   FindManyUsersResponseDTO,
   CreateOneUserResponse,
   CreateManyUsersResponseDTO,
-  SetMyPasswordDTO,
-  AuthedRequest,
 } from 'src/types';
-import { ApiController, AuthorizedOnly, ValidatedBody } from 'src/tools';
+import { ApiController, ValidatedBody } from 'src/tools';
 
 @ApiController('user')
 export class UserController {
@@ -46,23 +44,10 @@ export class UserController {
     @ValidatedBody
     { users }: CreateUsersDTO,
   ): Promise<CreateManyUsersResponseDTO> {
-    const userModels = await this.userUseCase.createManyUsers(
-      users.map((user) => ({ ...user, userGroups: [] })),
-    );
+    const userModels = await this.userUseCase.createManyUsers(users);
     return {
       users: userModels,
     };
-  }
-
-  @Post('setMyPassword')
-  @AuthorizedOnly()
-  async setMyPassword(
-    @Req() { user }: AuthedRequest,
-    @ValidatedBody
-    { password }: SetMyPasswordDTO,
-  ): Promise<EmptyResponseDTO> {
-    await this.userUseCase.setUserPassword(user.id, password);
-    return {};
   }
 
   @Post('deleteById')

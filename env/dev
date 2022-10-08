@@ -22,9 +22,12 @@ export NODE_ENV='development'
 export JWT_SECRET='[a0oej4rgip5g0aijefogpihn[4ijks;wk3f3ihgposldckdieselkwn5 vlkfj[q34t"k:\"KP_FF\"#ORKOWI:EJLEDK_@#sKOJGWRLGNK<ASJDN:EWLGKJWOIJWOLFJKNDSMNGSG>SNFELK<NSFMNSDLKGJBNO:FLKWEMF}}]]]'
 
 # Don`t forget to change to another long secure random string in production
-# It`s a part of salt for generating user password hashes
-export USER_PASSWORD_HASH_SALT='[ijwefleskemdlckajsrnoe-]50w[4-g3q[4gi-0[wjeirgvsloij;b[-q304ihjilosekrgmoit;ehkgm zsj.dne,smjrmnf]]]]]'
+# It`s a part of salt for generating user private key hashes
+export USER_PRIVATE_KEY_HASH_SALT='[ijwefleskemdlckajsrnoe-]50w[4-g3q[4gi-0[wjeirgvsloij;b[-q304ihjilosekrgmoit;ehkgm zsj.dne,smjrmnf]]]]]'
 export INVITE_USERS_SIGN_KEY='kjnervlkjnsvirue92hjn34lkjbisdkjbfvo3uhejijfoewlscnm,vniejrnvdkfvb ouerif938h4fu8oijw3opqihefnkawjnel'
+export ROOT_WALLET_PRIVATE_KEY='f65eb3320a3e9dd51eaf2d67d71e609459081cf63aefd32fda79c425c296f257'
+export ROOT_WALLET_PUBLIC_KEY='0x15Cc4abzz27647ec9fE70D892E55586074263dF0'
+export BLOCKCHAIN_BASE_URL='https://hackathon.lsp.team/hk/v1'
 
 export MOCK_SCRIPT_NAME='fillDBScript'
 

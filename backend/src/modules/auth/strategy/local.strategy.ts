@@ -15,17 +15,17 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     super({ usernameField: 'email' });
   }
 
-  async validate(email: string, password: string): Promise<UserAuthInfo> {
+  async validate(email: string, privateKey: string): Promise<UserAuthInfo> {
     const userModel =
-      await this.userRepo.findOneByEmailWithAccessScopesAndPassword(email);
+      await this.userRepo.findOneByEmailWithAccessScopesAndPrivateKey(email);
 
     if (!userModel)
       throw new UnauthorizedException(messages.auth.incorrectUser);
 
-    await this.authUseCase.validateLoginAttempt(userModel, password);
+    await this.authUseCase.validateLoginAttempt(userModel, privateKey);
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { passwordHash, salt, ...authInfo } = userModel;
+    const { privateKeyHash, salt, ...authInfo } = userModel;
     return authInfo;
   }
 }
