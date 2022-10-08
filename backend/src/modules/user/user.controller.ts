@@ -32,10 +32,8 @@ export class UserController {
     @ValidatedBody
     createUserDTO: CreateUserDTO,
   ): Promise<CreateOneUserResponse> {
-    const user = await this.userUseCase.createUser(createUserDTO);
-    return {
-      user,
-    };
+    const response = await this.userUseCase.createUser(createUserDTO);
+    return response;
   }
 
   @Post('createMany')
@@ -44,9 +42,9 @@ export class UserController {
     @ValidatedBody
     { users }: CreateUsersDTO,
   ): Promise<CreateManyUsersResponseDTO> {
-    const userModels = await this.userUseCase.createManyUsers(users);
+    const responses = await this.userUseCase.createManyUsers(users);
     return {
-      users: userModels,
+      responses,
     };
   }
 

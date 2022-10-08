@@ -1,8 +1,7 @@
 import { WalletPrivatePublicKeyPair } from '../../../walletPrivatePublicKeyPair.dto';
-import { InsertedUserWithIdDTO } from '../../insertedUserWithId.dto';
+import { AuthTokenPairDTO } from '../../../authTokenPair.dto';
 
-export class CreateOneUserResponse {
-  user!: InsertedUserWithIdDTO;
-
+export class RegisterUserDTO {
   walletPrivatePublicKeyPair!: WalletPrivatePublicKeyPair;
+  authTokenPair!: AuthTokenPairDTO;
 }

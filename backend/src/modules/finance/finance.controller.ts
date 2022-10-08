@@ -1,5 +1,5 @@
 import { Post } from '@nestjs/common';
-import { NFTUseCase } from './nft.useCase';
+import { FinanceUseCase } from './finance.useCase';
 import { EmptyResponseDTO, CreateNFT_DTO } from 'src/types';
 import {
   AccessEnum,
@@ -9,8 +9,8 @@ import {
 } from 'src/tools';
 
 @ApiController('nft')
-export class NFTController {
-  constructor(private readonly nftUseCase: NFTUseCase) {}
+export class FinanceController {
+  constructor(private readonly financeUseCase: FinanceUseCase) {}
 
   @Post('createAndApplyToUser')
   @AllowedFor(AccessEnum.SYSTEM_ADMIN)
@@ -18,7 +18,7 @@ export class NFTController {
     @ValidatedBody
     nft: CreateNFT_DTO,
   ): Promise<EmptyResponseDTO> {
-    await this.nftUseCase.createOne(nft);
+    await this.financeUseCase.createNFT();
     return { response: {} };
   }
 }

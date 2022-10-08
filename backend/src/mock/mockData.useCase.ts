@@ -7,7 +7,6 @@ import { AccessScopeType } from 'src/types';
 export class MockDataUseCase {
   constructor(
     private readonly userUseCase: UserUseCase,
-    private readonly accessScopeUseCase: AccessScopeUseCase,
     private readonly accessScopeRepo: repo.AccessScopeRepo,
   ) {}
 
@@ -36,7 +35,7 @@ export class MockDataUseCase {
       type: AccessScopeType.SYSTEM_ADMIN,
     });
 
-    const defaultUser = await this.userUseCase.createUser({
+    const { user } = await this.userUseCase.createUser({
       email: 'asd@asd.asd',
       lastName: 'Такой-тов',
       firstName: 'Такой-то',
@@ -48,7 +47,7 @@ export class MockDataUseCase {
       id: systemAdminScope.id,
       userToAccessScopeRelations: [
         {
-          userId: defaultUser.id,
+          userId: user.id,
         },
       ],
     });

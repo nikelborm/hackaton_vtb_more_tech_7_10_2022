@@ -6,7 +6,8 @@ import {
   EmptyResponseDTO,
   RefreshTokenDTO,
   UserAuthInfo,
-  TokenPairDTO,
+  AuthTokenPairDTO,
+  RegisterUserDTO,
 } from 'src/types';
 import { AuthUseCase } from './services';
 import { LocalAuthGuard } from './guards';
@@ -22,7 +23,7 @@ export class AuthController {
     @Query('email') email: string,
     @Query('privateKey') privateKey: string,
     @Request() req: { user: UserAuthInfo },
-  ): Promise<TokenPairDTO> {
+  ): Promise<AuthTokenPairDTO> {
     return await this.authUseCase.login(req.user);
   }
 
@@ -30,7 +31,7 @@ export class AuthController {
   async register(
     @ValidatedBody
     createUserDTO: CreateUserDTO,
-  ): Promise<TokenPairDTO> {
+  ): Promise<RegisterUserDTO> {
     return await this.authUseCase.registerNewUserAndLogin(createUserDTO);
   }
 
@@ -56,7 +57,7 @@ export class AuthController {
   async refreshTokens(
     @ValidatedBody
     { refreshToken }: RefreshTokenDTO,
-  ): Promise<TokenPairDTO> {
+  ): Promise<AuthTokenPairDTO> {
     return await this.authUseCase.useRefreshTokenAndGetNewTokenPair(
       refreshToken,
     );

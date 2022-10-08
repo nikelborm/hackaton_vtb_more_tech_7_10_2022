@@ -4,14 +4,15 @@ import { createHash, randomBytes } from 'crypto';
 import { ConfigService } from '@nestjs/config';
 import { messages } from 'src/config';
 import {
-  ClearedInsertedUserDTO,
+  InsertedUserWithIdDTO,
   ConfigKeys,
   CreateUserDTO,
   IAppConfigMap,
-  InputUser,
   PG_UNIQUE_CONSTRAINT_VIOLATION,
+  CreateOneUserResponse,
 } from 'src/types';
 import { isQueryFailedError } from 'src/tools';
+import { FinanceUseCase } from '../finance';
 
 @Injectable()
 export class UserUseCase {
@@ -19,6 +20,7 @@ export class UserUseCase {
 
   constructor(
     private readonly userRepo: repo.UserRepo,
+    private readonly financeUseCase: FinanceUseCase,
     private readonly configService: ConfigService<IAppConfigMap, true>,
   ) {
     this.USER_PRIVATE_KEY_HASH_SALT = this.configService.get(
@@ -32,20 +34,19 @@ export class UserUseCase {
 
   async createManyUsers(
     users: CreateUserDTO[],
-  ): Promise<ClearedInsertedUserDTO[]> {
+  ): Promise<CreateOneUserResponse[]> {
     return await Promise.all(users.map(this.createUser));
   }
 
-  async createUser(user: CreateUserDTO): Promise<ClearedInsertedUserDTO> {
-    /* eslint-disable @typescript-eslint/no-unused-vars, prettier/prettier */
-    let userWithoutSensitiveDataWithId: ClearedInsertedUserDTO;
+  async createUser(user: CreateUserDTO): Promise<CreateOneUserResponse> {
+    let userWithoutSensitiveDataWithId: InsertedUserWithIdDTO;
+    const { privateKey, publicKey } = await this.financeUseCase.createWallet();
     try {
-      const privateKey = `${Math.random()}`;
       userWithoutSensitiveDataWithId = (({
         privateKeyHash,
         salt,
         ...rest
-      }): ClearedInsertedUserDTO => rest)(
+      }): InsertedUserWithIdDTO => rest)(
         await this.userRepo.createOneWithRelations(
           this.createUserModel({
             ...user,
@@ -60,14 +61,21 @@ export class UserUseCase {
       throw error;
     }
 
-    return userWithoutSensitiveDataWithId;
-        /* eslint-enable @typescript-eslint/no-unused-vars, prettier/prettier */
+    return {
+      user: userWithoutSensitiveDataWithId,
+      walletPrivatePublicKeyPair: {
+        privateKey,
+        publicKey,
+      },
+    };
   }
 
   private createUserModel({
     privateKey,
     ...rest
-  }: InputUser): UserModelToInsert {
+  }: CreateUserDTO & {
+    privateKey: string;
+  }): UserModelToInsert {
     const salt = randomBytes(64).toString('hex');
     return {
       ...rest,

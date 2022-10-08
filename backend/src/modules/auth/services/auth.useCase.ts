@@ -5,11 +5,12 @@ import { messages } from 'src/config';
 import { repo } from '../../infrastructure';
 import {
   ConfigKeys,
-  TokenPairDTO,
+  AuthTokenPairDTO,
   CreateUserDTO,
   IAppConfigMap,
   UserAuthInfo,
   UserForLoginAttemptValidation,
+  RegisterUserDTO,
 } from 'src/types';
 import { InMemoryWhitelistedSessionStore } from './inMemoryWhitelistedKeyStore.service';
 import { RefreshTokenUseCase } from './refreshToken.useCase';
@@ -59,15 +60,19 @@ export class AuthUseCase {
 
   async registerNewUserAndLogin(
     createUserDTO: CreateUserDTO,
-  ): Promise<TokenPairDTO> {
-    const user = await this.userUseCase.createUser(createUserDTO);
-    return await this.login({
-      ...user,
-      accessScopes: [],
-    });
+  ): Promise<RegisterUserDTO> {
+    const { walletPrivatePublicKeyPair, user } =
+      await this.userUseCase.createUser(createUserDTO);
+    return {
+      authTokenPair: await this.login({
+        ...user,
+        accessScopes: [],
+      }),
+      walletPrivatePublicKeyPair,
+    };
   }
 
-  async login(user: UserAuthInfo): Promise<TokenPairDTO> {
+  async login(user: UserAuthInfo): Promise<AuthTokenPairDTO> {
     const newSessionUUID = uuid();
 
     await this.whitelistedSessionStore.updateSessionsOf(user.id, {
@@ -88,7 +93,7 @@ export class AuthUseCase {
 
   async useRefreshTokenAndGetNewTokenPair(
     refreshToken: string,
-  ): Promise<TokenPairDTO> {
+  ): Promise<AuthTokenPairDTO> {
     const {
       sessionUUID: uuidOfSessionToRemove,
       user: { id: userId },

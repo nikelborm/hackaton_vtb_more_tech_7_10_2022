@@ -12,7 +12,7 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     private readonly authUseCase: AuthUseCase,
     private readonly userRepo: repo.UserRepo,
   ) {
-    super({ usernameField: 'email' });
+    super({ usernameField: 'email', passwordField: 'privateKey' });
   }
 
   async validate(email: string, privateKey: string): Promise<UserAuthInfo> {
