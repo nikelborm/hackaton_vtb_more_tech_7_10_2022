@@ -1,4 +1,4 @@
-import { UserAuthInfo } from 'src/types/shared/userAuthInfo';
+import { UserAuthInfo } from '../../../userAuthInfo';
 
 export class GetNFTsOfUserResponseDTO {
   nfts!: {
