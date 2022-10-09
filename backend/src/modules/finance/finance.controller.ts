@@ -18,9 +18,9 @@ import {
 export class FinanceController {
   constructor(private readonly financeUseCase: FinanceUseCase) {}
 
-  @Get('getMineOverallBalance')
+  @Get('getMyOverallBalance')
   @AuthorizedOnly()
-  async getMineOverallBalance(
+  async getMyOverallBalance(
     @Request() { user }: AuthedRequest,
   ): Promise<GetOverallBalanceOfUserResponse> {
     return await this.financeUseCase.getOverallBalanceOfUser(user.publicKey);
@@ -28,7 +28,7 @@ export class FinanceController {
 
   @Post('createNFTAndTransferToUser')
   @AllowedFor(AccessEnum.SYSTEM_ADMIN)
-  async createNFT(
+  async createNFTAndTransferToUser(
     @ValidatedBody
     nft: CreateNFT_DTO,
   ): Promise<EmptyResponseDTO> {
