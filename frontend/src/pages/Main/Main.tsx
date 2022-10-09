@@ -9,6 +9,7 @@ import {
 } from '../../assets';
 
 export function Main() {
+  const { users } = useAllUsersQuery();
   return (
     <div className="container">
       <div className="actives_block">
@@ -53,7 +54,7 @@ export function Main() {
       </div>
       <div className="midle_block">
         <div className="users_block">
-          {useAllUsersQuery().users.map(() => (
+          {users.map((user) => (
             <div className="user">
               <div className="up_user">
                 <div className="img_user">
@@ -63,8 +64,8 @@ export function Main() {
 
               <div className="bottom_user">
                 <div className="title_user">
-                  <div className="name_user">Женя Пирог</div>
-                  <div className="rol_user">Сотрудник</div>
+                  <div className="name_user">{user.name}</div>
+                  <div className="rol_user">{user.rol}</div>
                 </div>
                 <div className="donat_user">
                   <img src={donatepicturepath} alt="" />

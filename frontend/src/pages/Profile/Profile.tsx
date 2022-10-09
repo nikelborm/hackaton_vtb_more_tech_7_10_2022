@@ -1,3 +1,4 @@
+import { useMyOverallBalance } from 'hooks';
 import { useParams } from 'react-router-dom';
 import {
   imglkpcturepath,
@@ -10,7 +11,7 @@ import {
 export function Profile() {
   const asd = useParams();
   // eslint-disable-next-line no-console
-  console.log('Profile useParams: ', asd);
+  const { balance, nfts } = useMyOverallBalance();
   return (
     <div className="container">
       <div className="info_lk">
@@ -30,7 +31,8 @@ export function Profile() {
         </div>
         <div className="exp_name">
           <div className="up_name">
-            <h2 className="name_lk">Женя Клависин</h2>
+            <h2 className="name_lk">Женя Пирог</h2>
+            <div className="balans">Счет {balance}</div>
             <img src={imglkpcturepath} alt="" />
           </div>
           <div className="exp_lk">
@@ -49,7 +51,9 @@ export function Profile() {
       <div className="achiv_lk">
         <div className="achiv">
           <div className="img_achiv" />
-          <div className="title_achiv">За курсеру</div>
+          {nfts.map((i) => (
+            <div className="title_achiv">{i.asd}</div>
+          ))}
         </div>
       </div>
     </div>
