@@ -59,5 +59,10 @@ export class MockDataUseCase {
       },
       receiverUserId: user.id,
     });
+
+    // const asd = await this.financeUseCase.getOverallBalanceOfUser(
+    //   '0x1D996a20F1c65a93D23BDa271F5186aca3b77caf',
+    // );
+    // console.log('asd: ', asd);
   }
 }

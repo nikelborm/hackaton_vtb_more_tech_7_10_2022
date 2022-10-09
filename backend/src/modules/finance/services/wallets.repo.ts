@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import {
   ConfigKeys,
+  GetNFTsOfUserResponseDTO,
   GetUserBalanceResponseDTO,
   IAppConfigMap,
   WalletPrivatePublicKeyPair,
@@ -38,15 +39,20 @@ export class WalletRepo {
     return walletPrivatePublicKeyPair;
   }
 
-  async getNFTsOfUser(publicKey: string): Promise<{ asd: string }> {
+  async getNFTsOfUser(publicKey: string): Promise<GetNFTsOfUserResponseDTO> {
     const response = await fetch(
       `${this.BLOCKCHAIN_BASE_URL}/wallets/${publicKey}/nft/balance`,
     );
 
-    const data = (await response.json()) as { asd: string };
-    console.log('getNFTsOfUser data: ', data);
+    const data = ((await response.json()) as any).balance.map(
+      ({ uri, tokens }) => ({
+        tokenId: tokens[0],
+        ...JSON.parse(decodeURIComponent(uri)),
+      }),
+    );
+    console.log('getNFTsOfUser data: ', JSON.stringify(data));
 
-    return data;
+    return { nfts: data };
   }
 
   async getBalanceOfUser(

@@ -21,13 +21,15 @@ export function Registration() {
             Your registration was successful. Before you continue, please write
             these keys down:
           </p>
-          <p>Private wallet key: </p>
+          <p style={{ fontWeight: 'bold' }}>Private wallet key: </p>
           <pre>{data.walletPrivatePublicKeyPair.privateKey}</pre>
-          <p>Public wallet key:</p>
+          <p style={{ fontWeight: 'bold' }}>Public wallet key:</p>
           <pre>{data.walletPrivatePublicKeyPair.publicKey}</pre>
           <p>
             It is your wallet keys. If you lose the private key, you will be
             unable to make any payments or even log in to your account.
+          </p>
+          <p>
             <Typography.Text type="danger">
               Do not share your private key with anyone!
             </Typography.Text>

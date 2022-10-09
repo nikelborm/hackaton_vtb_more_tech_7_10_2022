@@ -1,3 +1,12 @@
+import { UserAuthInfo } from 'src/types/shared/userAuthInfo';
+
 export class GetNFTsOfUserResponseDTO {
-  asd!: string;
+  nfts!: {
+    tokenId: number;
+    user: UserAuthInfo;
+    certificateContent: {
+      name: string;
+      description: string;
+    };
+  }[];
 }

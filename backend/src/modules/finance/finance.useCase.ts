@@ -3,6 +3,7 @@ import { NFTRepo, WalletRepo } from './services';
 import {
   ConfigKeys,
   CreateNFT_DTO,
+  GetNFTsOfUserResponseDTO,
   GetOverallBalanceOfUserResponse,
   GetUserBalanceResponseDTO,
   IAppConfigMap,
@@ -69,7 +70,7 @@ export class FinanceUseCase {
   async getOverallBalanceOfUser(
     publicKey: string,
   ): Promise<GetOverallBalanceOfUserResponse> {
-    const [nfts, balance] = await Promise.all([
+    const [{ nfts }, balance] = await Promise.all([
       this.getNFTsOfUser(publicKey),
       this.getBalanceOfUser(publicKey),
     ]);
@@ -77,7 +78,7 @@ export class FinanceUseCase {
     return { nfts, balance };
   }
 
-  async getNFTsOfUser(publicKey: string): Promise<{ asd: string }> {
+  async getNFTsOfUser(publicKey: string): Promise<GetNFTsOfUserResponseDTO> {
     return await this.walletRepo.getNFTsOfUser(publicKey);
   }
 
