@@ -20,7 +20,7 @@ export class FinanceController {
 
   @Get('getMineOverallBalance')
   @AuthorizedOnly()
-  async getMyNFTs(
+  async getMineOverallBalance(
     @Request() { user }: AuthedRequest,
   ): Promise<GetOverallBalanceOfUserResponse> {
     return await this.financeUseCase.getOverallBalanceOfUser(user.publicKey);
