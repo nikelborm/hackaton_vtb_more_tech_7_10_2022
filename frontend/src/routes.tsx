@@ -1,4 +1,4 @@
-import { Profile, Login, Registration, Root } from 'pages';
+import { Profile, Login, Registration, Root, Main } from 'pages';
 import { UserOutlined } from '@ant-design/icons';
 import {
   RoutesEnum,
@@ -44,7 +44,17 @@ export const routesOnlyForAuthedUsers: RoutesMap<AuthedRouteEntity> = {
     description: 'User desc',
     menuIcon: <UserOutlined />,
     canUserOpenThisRoute: () => true,
-    Extras: () => <>Extras react component</>,
+    Extras: () => <>_</>,
+  },
+  [RoutesEnum.MAIN]: {
+    Component: Main,
+    isMenuPoint: true,
+    menuTitle: 'main',
+    pageTitle: 'main',
+    description: 'main desc',
+    menuIcon: <UserOutlined />,
+    canUserOpenThisRoute: () => true,
+    Extras: () => <>_</>,
   },
 };
 

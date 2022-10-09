@@ -82,6 +82,24 @@ export class FinanceUseCase {
     return await this.walletRepo.getNFTsOfUser(publicKey);
   }
 
+  async isNFTgenerated(
+    transactionHash: string,
+  ): Promise<{ isGenerated: false } | { isGenerated: true; tokenId: number }> {
+    return await this.nftRepo.isNFTgenerated(transactionHash);
+  }
+
+  async moveNFTtoAnotherWallet(
+    fromPrivateKey: string,
+    toPublicKey: string,
+    tokenId: number,
+  ): Promise<{ transactionHash: string }> {
+    return await this.nftRepo.moveNFTtoAnotherWallet(
+      fromPrivateKey,
+      toPublicKey,
+      tokenId,
+    );
+  }
+
   async getBalanceOfUser(
     publicKey: string,
   ): Promise<GetUserBalanceResponseDTO> {

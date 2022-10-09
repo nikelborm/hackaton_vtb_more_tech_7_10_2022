@@ -15,6 +15,10 @@
 1. Run `yarn mount` to mount `./frontend/backendTypes` for better VS code support
 2. Call task in VS code: `Up dev`. Command could be also found in `./.vscode/tasks.json`
 
+## Presentation
+
+[Presentation](https://docs.google.com/presentation/d/1VWfSwYBV5gnTxQaKo2Bm0xeJsQV_CJ_XHebRiSHyODY/edit?usp=sharing)
+
 ## How to run psql
 
 ```bash

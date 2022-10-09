@@ -50,14 +50,16 @@ export function Profile() {
       </div>
       <div className="achiv_lk">
         <div className="achiv">
-          <div className="img_achiv" />
           {nfts?.map((i) => (
-            <div className="block_achiv">
-              <div className="title_achiv">{i.certificateContent.name}</div>
-              <div className="title_achiv">
-                {i.certificateContent.description}
+            <>
+              <div className="img_achiv" />
+              <div className="block_achiv">
+                <div className="title_achiv">{i.certificateContent.name}</div>
+                <div className="title_achiv">
+                  {i.certificateContent.description}
+                </div>
               </div>
-            </div>
+            </>
           ))}
         </div>
       </div>

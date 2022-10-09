@@ -29,8 +29,8 @@ async function bootstrap(): Promise<void> {
 
   const markerFilePath = join(resolve(), 'wasMockScriptCalledOnStartup');
 
-  // const wasMockScriptCalledOnStartup = false;
-  const wasMockScriptCalledOnStartup = existsSync(markerFilePath);
+  const wasMockScriptCalledOnStartup = false;
+  // const wasMockScriptCalledOnStartup = existsSync(markerFilePath);
   console.log('wasMockScriptCalledOnStartup: ', wasMockScriptCalledOnStartup);
 
   if (

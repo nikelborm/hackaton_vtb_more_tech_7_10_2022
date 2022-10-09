@@ -8,6 +8,7 @@ export enum RoutesEnum {
   /* 4 */ USER = 'user/:id',
   /* 5 */ ROOT = '/', // landing
   /* 6 */ ERROR_404 = '404',
+  /* 6 */ MAIN = 'main',
 }
 
 export interface SimpleRouteEntity {
