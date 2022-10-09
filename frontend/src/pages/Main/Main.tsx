@@ -1,3 +1,4 @@
+import { useAllUsersQuery } from 'hooks';
 import React from 'react';
 import {
   elonpicturepath,
@@ -52,40 +53,25 @@ export function Main() {
       </div>
       <div className="midle_block">
         <div className="users_block">
-          <div className="user">
-            <div className="up_user">
-              <div className="img_user">
-                <img src={elonpicturepath} alt="" />
+          {useAllUsersQuery().users.map(() => (
+            <div className="user">
+              <div className="up_user">
+                <div className="img_user">
+                  <img src={elonpicturepath} alt="" />
+                </div>
               </div>
-            </div>
 
-            <div className="bottom_user">
-              <div className="title_user">
-                <div className="name_user">Женя Пирог</div>
-                <div className="rol_user">Сотрудник</div>
-              </div>
-              <div className="donat_user">
-                <img src={donatepicturepath} alt="" />
-              </div>
-            </div>
-          </div>
-          <div className="user">
-            <div className="up_user">
-              <div className="img_user">
-                <img src={elonpicturepath} alt="" />
+              <div className="bottom_user">
+                <div className="title_user">
+                  <div className="name_user">Женя Пирог</div>
+                  <div className="rol_user">Сотрудник</div>
+                </div>
+                <div className="donat_user">
+                  <img src={donatepicturepath} alt="" />
+                </div>
               </div>
             </div>
-
-            <div className="bottom_user">
-              <div className="title_user">
-                <div className="name_user">Женя Пирог</div>
-                <div className="rol_user">Сотрудник</div>
-              </div>
-              <div className="donat_user">
-                <img src={donatepicturepath} alt="" />
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
         <div className="tasks">
           <img src={taskspicturepath} alt="" />
