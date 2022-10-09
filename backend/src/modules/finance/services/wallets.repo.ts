@@ -9,13 +9,14 @@ import {
 
 @Injectable()
 export class WalletRepo {
-  private BLOCKCHAIN_BASE_URL: string;
+  private readonly BLOCKCHAIN_BASE_URL: string;
 
   constructor(
     private readonly configService: ConfigService<IAppConfigMap, true>,
   ) {
     this.BLOCKCHAIN_BASE_URL = this.configService.get(
       ConfigKeys.BLOCKCHAIN_BASE_URL,
+      { infer: true },
     );
   }
 
@@ -29,5 +30,16 @@ export class WalletRepo {
       (await walletResponse.json()) as WalletPrivatePublicKeyPair;
 
     return walletPrivatePublicKeyPair;
+  }
+
+  async getNFTsOfUser(publicKey: string): Promise<{ asd: string }> {
+    const response = await fetch(
+      `${this.BLOCKCHAIN_BASE_URL}/wallets/${publicKey}/balance`,
+    );
+
+    const data = (await response.json()) as { asd: string };
+    console.log('getNFTsOfUser data: ', data);
+
+    return data;
   }
 }

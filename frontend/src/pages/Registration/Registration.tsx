@@ -1,4 +1,4 @@
-import { Button, Form, message } from 'antd';
+import { Button, Form, message, Typography } from 'antd';
 import {
   AuthFormSubmitButton,
   CenteredAuthFormHeader,
@@ -19,15 +19,18 @@ export function Registration() {
         <div>
           <p>
             Your registration was successful. Before you continue, please write
-            down these keys:
+            these keys down:
           </p>
           <p>Private wallet key: </p>
           <pre>{data.walletPrivatePublicKeyPair.privateKey}</pre>
           <p>Public wallet key:</p>
           <pre>{data.walletPrivatePublicKeyPair.publicKey}</pre>
           <p>
-            It is your wallet keys. If you will lost them, you will be unable to
-            make any payments and even login to your account.
+            It is your wallet keys. If you lose the private key, you will be
+            unable to make any payments or even log in to your account.
+            <Typography.Text type="danger">
+              Do not share your private key with anyone!
+            </Typography.Text>
           </p>
           <Button
             type="primary"

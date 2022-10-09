@@ -8,6 +8,7 @@ export class MockDataUseCase {
   constructor(
     private readonly userUseCase: UserUseCase,
     private readonly accessScopeRepo: repo.AccessScopeRepo,
+    private readonly userToAccessScopeRepo: repo.UserToAccessScopeRepo,
   ) {}
 
   async executeMock(scriptName?: string): Promise<void> {
@@ -45,13 +46,9 @@ export class MockDataUseCase {
       });
     console.log('walletPrivatePublicKeyPair: ', walletPrivatePublicKeyPair);
 
-    await this.accessScopeRepo.updateOneWithRelations({
-      id: systemAdminScope.id,
-      userToAccessScopeRelations: [
-        {
-          userId: user.id,
-        },
-      ],
+    await this.userToAccessScopeRepo.createOne({
+      accessScopeId: systemAdminScope.id,
+      userId: user.id,
     });
   }
 }

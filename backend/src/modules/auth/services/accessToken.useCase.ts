@@ -13,14 +13,16 @@ import { InMemoryWhitelistedSessionStore } from './inMemoryWhitelistedKeyStore.s
 
 @Injectable()
 export class AccessTokenUseCase {
-  private JWT_SECRET: string;
+  private readonly AUTH_JWT_SECRET: string;
 
   constructor(
     private readonly jwtService: JwtService,
     private readonly whitelistedSessionStore: InMemoryWhitelistedSessionStore,
     private readonly configService: ConfigService<IAppConfigMap, true>,
   ) {
-    this.JWT_SECRET = this.configService.get(ConfigKeys.JWT_SECRET);
+    this.AUTH_JWT_SECRET = this.configService.get(ConfigKeys.AUTH_JWT_SECRET, {
+      infer: true,
+    });
   }
 
   getAccessToken(user: UserAuthInfo, sessionUUID: string): string {
@@ -55,7 +57,7 @@ export class AccessTokenUseCase {
 
     try {
       this.jwtService.verify(accessToken, {
-        secret: this.JWT_SECRET,
+        secret: this.AUTH_JWT_SECRET,
         ignoreExpiration: false,
       });
     } catch (error) {

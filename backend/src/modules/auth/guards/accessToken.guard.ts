@@ -22,7 +22,7 @@ import { repo } from 'src/modules/infrastructure';
 
 @Injectable()
 export class AccessTokenGuard implements CanActivate {
-  private IS_DEVELOPMENT: boolean;
+  private readonly IS_DEVELOPMENT: boolean;
 
   constructor(
     private readonly configService: ConfigService<IAppConfigMap, true>,
@@ -30,7 +30,9 @@ export class AccessTokenGuard implements CanActivate {
     private readonly userRepo: repo.UserRepo,
     private readonly reflector: Reflector,
   ) {
-    this.IS_DEVELOPMENT = this.configService.get(ConfigKeys.IS_DEVELOPMENT);
+    this.IS_DEVELOPMENT = this.configService.get(ConfigKeys.IS_DEVELOPMENT, {
+      infer: true,
+    });
   }
 
   async canActivate(context: ExecutionContext): Promise<boolean> {

@@ -13,14 +13,16 @@ import { messages } from 'src/config';
 
 @Injectable()
 export class RefreshTokenUseCase {
-  private JWT_SECRET: string;
+  private readonly AUTH_JWT_SECRET: string;
 
   constructor(
     private readonly jwtService: JwtService,
     private readonly whitelistedSessionStore: InMemoryWhitelistedSessionStore,
     private readonly configService: ConfigService<IAppConfigMap, true>,
   ) {
-    this.JWT_SECRET = this.configService.get(ConfigKeys.JWT_SECRET);
+    this.AUTH_JWT_SECRET = this.configService.get(ConfigKeys.AUTH_JWT_SECRET, {
+      infer: true,
+    });
   }
 
   getRefreshToken(user: UserAuthInfo, sessionUUID: string): string {
@@ -35,7 +37,7 @@ export class RefreshTokenUseCase {
   ): Promise<UserRefreshTokenPayload> {
     try {
       this.jwtService.verify(refreshToken, {
-        secret: this.JWT_SECRET,
+        secret: this.AUTH_JWT_SECRET,
         ignoreExpiration: false,
       });
     } catch (error) {

@@ -1,10 +1,11 @@
-import { Post } from '@nestjs/common';
+import { Post, Request } from '@nestjs/common';
 import { FinanceUseCase } from './finance.useCase';
-import { EmptyResponseDTO, CreateNFT_DTO } from 'src/types';
+import { EmptyResponseDTO, CreateNFT_DTO, AuthedRequest } from 'src/types';
 import {
   AccessEnum,
   AllowedFor,
   ApiController,
+  AuthorizedOnly,
   ValidatedBody,
 } from 'src/tools';
 
@@ -18,7 +19,16 @@ export class FinanceController {
     @ValidatedBody
     nft: CreateNFT_DTO,
   ): Promise<EmptyResponseDTO> {
-    await this.financeUseCase.createNFT();
-    return { response: {} };
+    await this.financeUseCase.createNFT(nft);
+    return {};
+  }
+
+  @Post('getMine')
+  @AuthorizedOnly()
+  async getMyNFTs(
+    @Request() { user }: AuthedRequest,
+  ): Promise<EmptyResponseDTO> {
+    await this.financeUseCase.getNFTsOfUser(user.publicKey);
+    return {};
   }
 }

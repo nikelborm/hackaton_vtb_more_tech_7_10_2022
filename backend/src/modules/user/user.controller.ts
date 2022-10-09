@@ -9,14 +9,20 @@ import {
   CreateOneUserResponse,
   CreateManyUsersResponseDTO,
 } from 'src/types';
-import { ApiController, ValidatedBody } from 'src/tools';
+import {
+  AccessEnum,
+  AllowedFor,
+  ApiController,
+  AuthorizedOnly,
+  ValidatedBody,
+} from 'src/tools';
 
 @ApiController('user')
 export class UserController {
   constructor(private readonly userUseCase: UserUseCase) {}
 
   @Get('all')
-  // @AllowedFor(AccessEnum.SYSTEM_ADMIN)
+  @AuthorizedOnly()
   async findManyUsers(
     @Query('search') search?: string,
   ): Promise<FindManyUsersResponseDTO> {
@@ -27,7 +33,7 @@ export class UserController {
   }
 
   @Post('create')
-  // @AllowedFor(AccessEnum.SYSTEM_ADMIN)
+  @AllowedFor(AccessEnum.SYSTEM_ADMIN)
   async createUser(
     @ValidatedBody
     createUserDTO: CreateUserDTO,
@@ -37,7 +43,7 @@ export class UserController {
   }
 
   @Post('createMany')
-  // @AllowedFor(AccessEnum.SYSTEM_ADMIN)
+  @AllowedFor(AccessEnum.SYSTEM_ADMIN)
   async createUsers(
     @ValidatedBody
     { users }: CreateUsersDTO,
@@ -49,7 +55,7 @@ export class UserController {
   }
 
   @Post('deleteById')
-  // @AllowedFor(AccessEnum.SYSTEM_ADMIN)
+  @AllowedFor(AccessEnum.SYSTEM_ADMIN)
   async deleteUser(
     @ValidatedBody
     { id }: DeleteEntityByIdDTO,

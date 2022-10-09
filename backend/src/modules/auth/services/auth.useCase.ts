@@ -21,7 +21,7 @@ import { UserUseCase } from 'src/modules/user';
 
 @Injectable()
 export class AuthUseCase {
-  private USER_PRIVATE_KEY_HASH_SALT: string;
+  private readonly USER_PRIVATE_KEY_HASH_SALT: string;
 
   constructor(
     private readonly accessTokenUseCase: AccessTokenUseCase,
@@ -33,6 +33,7 @@ export class AuthUseCase {
   ) {
     this.USER_PRIVATE_KEY_HASH_SALT = this.configService.get(
       ConfigKeys.USER_PRIVATE_KEY_HASH_SALT,
+      { infer: true },
     );
   }
 

@@ -21,7 +21,7 @@ import { UserModule } from '../user';
     JwtModule.registerAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService<IAppConfigMap, true>) => ({
-        secret: configService.get(ConfigKeys.JWT_SECRET),
+        secret: configService.get(ConfigKeys.AUTH_JWT_SECRET, { infer: true }),
       }),
       inject: [ConfigService],
     }),

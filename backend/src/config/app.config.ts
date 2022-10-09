@@ -15,7 +15,7 @@ export const appConfig: () => IAppConfigMap = () => ({
     keyof MockDataUseCase,
     'executeMock'
   >,
-  [ConfigKeys.JWT_SECRET]: process.env.JWT_SECRET as string,
+  [ConfigKeys.AUTH_JWT_SECRET]: process.env.AUTH_JWT_SECRET as string,
   [ConfigKeys.USER_PRIVATE_KEY_HASH_SALT]: process.env
     .USER_PRIVATE_KEY_HASH_SALT as string,
   [ConfigKeys.INVITE_USERS_SIGN_KEY]: process.env

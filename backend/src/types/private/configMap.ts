@@ -8,7 +8,7 @@ export type IAppConfigMap = {
   [ConfigKeys.IS_DEVELOPMENT]: boolean;
   [ConfigKeys.IS_PRODUCTION]: boolean;
   [ConfigKeys.MOCK_SCRIPT_NAME]: Exclude<keyof MockDataUseCase, 'executeMock'>;
-  [ConfigKeys.JWT_SECRET]: string;
+  [ConfigKeys.AUTH_JWT_SECRET]: string;
   [ConfigKeys.USER_PRIVATE_KEY_HASH_SALT]: string;
   [ConfigKeys.SERVER_PORT]: number;
   [ConfigKeys.WEB_SOCKET_SERVER_PORT]: number;

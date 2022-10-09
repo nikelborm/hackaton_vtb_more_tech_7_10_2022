@@ -17,7 +17,7 @@ import { FinanceUseCase } from '../finance';
 
 @Injectable()
 export class UserUseCase {
-  private USER_PRIVATE_KEY_HASH_SALT: string;
+  private readonly USER_PRIVATE_KEY_HASH_SALT: string;
 
   constructor(
     private readonly userRepo: repo.UserRepo,
@@ -26,6 +26,7 @@ export class UserUseCase {
   ) {
     this.USER_PRIVATE_KEY_HASH_SALT = this.configService.get(
       ConfigKeys.USER_PRIVATE_KEY_HASH_SALT,
+      { infer: true },
     );
   }
 

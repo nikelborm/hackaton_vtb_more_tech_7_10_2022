@@ -51,6 +51,7 @@ export class UserRepo {
         lastName: true,
         patronymic: true,
         gender: true,
+        publicKey: true,
         phone: true,
         accessScopes: {
           id: true,
@@ -78,6 +79,10 @@ export class UserRepo {
 
   async getOneByEmail(userEmail: string): Promise<User | null> {
     return await this.repo.findOne({ where: { email: userEmail } });
+  }
+
+  async getOneByPublicKey(publicKey: string): Promise<User | null> {
+    return await this.repo.findOne({ where: { publicKey } });
   }
 
   async findOneByName(
@@ -111,7 +116,7 @@ export class UserRepo {
     return await updateOnePlain<User, 'id'>(this.repo, updatedUser);
   }
 
-  async findOneByEmailWithAccessScopesAndPrivateKey(
+  async findOneByEmailWithAccessScopesAndPrivateKeyHash(
     email: string,
   ): Promise<UserForLoginAttemptValidation> {
     const user = await this.repo
