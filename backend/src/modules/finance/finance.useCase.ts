@@ -3,6 +3,8 @@ import { NFTRepo, WalletRepo } from './services';
 import {
   ConfigKeys,
   CreateNFT_DTO,
+  GetOverallBalanceOfUserResponse,
+  GetUserBalanceResponseDTO,
   IAppConfigMap,
   WalletPrivatePublicKeyPair,
 } from 'src/types';
@@ -48,8 +50,9 @@ export class FinanceUseCase {
       this.ROOT_WALLET_PUBLIC_KEY,
       uri,
     );
+    console.log('transactionHash: ', transactionHash);
     let tokenId: number;
-    while (true) {
+    for (let i = 0; i < 10; i++) {
       const response = await this.nftRepo.isNFTgenerated(transactionHash);
       if (response.isGenerated) {
         tokenId = response.tokenId;
@@ -59,11 +62,28 @@ export class FinanceUseCase {
     await this.nftRepo.moveNFTtoAnotherWallet(
       this.ROOT_WALLET_PRIVATE_KEY,
       user.publicKey,
-      tokenId,
+      1,
     );
+  }
+
+  async getOverallBalanceOfUser(
+    publicKey: string,
+  ): Promise<GetOverallBalanceOfUserResponse> {
+    const [nfts, balance] = await Promise.all([
+      this.getNFTsOfUser(publicKey),
+      this.getBalanceOfUser(publicKey),
+    ]);
+
+    return { nfts, balance };
   }
 
   async getNFTsOfUser(publicKey: string): Promise<{ asd: string }> {
     return await this.walletRepo.getNFTsOfUser(publicKey);
+  }
+
+  async getBalanceOfUser(
+    publicKey: string,
+  ): Promise<GetUserBalanceResponseDTO> {
+    return await this.walletRepo.getBalanceOfUser(publicKey);
   }
 }

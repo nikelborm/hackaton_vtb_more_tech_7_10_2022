@@ -20,17 +20,21 @@ export class NFTRepo {
     toPublicKey: string,
     uri: string,
   ): Promise<{ transactionHash: string }> {
-    const response = await fetch(`${this.BLOCKCHAIN_BASE_URL}/nft/generate`, {
+    const response = await fetch(`${this.BLOCKCHAIN_BASE_URL}/nft/generate/`, {
       method: 'POST',
+      headers: {
+        ['Content-Type']: 'application/json',
+      },
       body: JSON.stringify({
         toPublicKey,
         uri,
         nftCount: 1,
       }),
     });
-    const data = (await response.json()) as { transactionHash: string };
+    const data = (await response.json()) as { transaction_hash: string };
+    console.log('NFTRepo.createOne data: ', data);
 
-    return data;
+    return { transactionHash: data.transaction_hash };
   }
 
   async isNFTgenerated(
@@ -44,8 +48,9 @@ export class NFTRepo {
       wallet_id: string;
       tokens: [number];
     };
+    console.log('data: ', data);
 
-    if (data.tokens.length)
+    if (data?.tokens?.length)
       return {
         isGenerated: true,
         tokenId: data.tokens[0],
@@ -61,6 +66,9 @@ export class NFTRepo {
   ): Promise<{ transactionHash: string }> {
     const response = await fetch(`${this.BLOCKCHAIN_BASE_URL}/transfers/nft`, {
       method: 'POST',
+      headers: {
+        ['Content-Type']: 'application/json',
+      },
       body: JSON.stringify({
         fromPrivateKey,
         toPublicKey,

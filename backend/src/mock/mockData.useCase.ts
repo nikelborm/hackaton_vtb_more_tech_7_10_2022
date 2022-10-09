@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { mockUseCaseMethodsAllowedToBeExecuted } from 'src/config';
-import { AccessScopeUseCase, repo, UserUseCase } from 'src/modules';
+import { FinanceUseCase, repo, UserUseCase } from 'src/modules';
 import { AccessScopeType } from 'src/types';
 
 @Injectable()
@@ -8,6 +8,7 @@ export class MockDataUseCase {
   constructor(
     private readonly userUseCase: UserUseCase,
     private readonly accessScopeRepo: repo.AccessScopeRepo,
+    private readonly financeUseCase: FinanceUseCase,
     private readonly userToAccessScopeRepo: repo.UserToAccessScopeRepo,
   ) {}
 
@@ -49,6 +50,14 @@ export class MockDataUseCase {
     await this.userToAccessScopeRepo.createOne({
       accessScopeId: systemAdminScope.id,
       userId: user.id,
+    });
+
+    await this.financeUseCase.createNFT({
+      certificateContent: {
+        name: 'More tech',
+        description: 'Сертификат за участвие в хакатоне More Tech 2022',
+      },
+      receiverUserId: user.id,
     });
   }
 }
