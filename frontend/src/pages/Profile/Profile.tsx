@@ -1,4 +1,11 @@
 import { useParams } from 'react-router-dom';
+import {
+  imglkpcturepath,
+  elonbadpcturepath,
+  grouppicturepath,
+  convertpcturepath,
+  createpcturepath,
+} from '../../assets';
 
 export function Profile() {
   const asd = useParams();
@@ -9,10 +16,7 @@ export function Profile() {
       <div className="info_lk">
         <div className="foto_goal">
           <div className="foto">
-            <img
-              src="http://cs01.services.mya5.ru/DwABAIQAzQFeAc0B6v_D-w8/GY-6nffc3pO0E-W8Sd_zEw/sv/image/26/79/21/705098/20/d0e71037cab99435a4dfb7ccce819245.jpg?1543250883"
-              alt=""
-            />
+            <img src={elonbadpcturepath} alt="" />
           </div>
           <div className="goal">
             <div className="title_goal">Моя цель</div>
@@ -27,22 +31,27 @@ export function Profile() {
         <div className="exp_name">
           <div className="up_name">
             <h2 className="name_lk">Женя Клависин</h2>
-            <div className="lvl_lk">3</div>
-            <div className="redact">-</div>
+            <img src={imglkpcturepath} alt="" />
           </div>
           <div className="exp_lk">
             <div className="title_exp">Опыт для следущего уровня</div>
-            <img src="" alt="" />
+            <img src={grouppicturepath} alt="" />
           </div>
-          <div className="create_active" />
+          <div className="create_active">
+            <img src={createpcturepath} alt="" />
+          </div>
         </div>
         <div className="mony_lk">
-          <div className="convert">23 money - 45Р </div>
-          <div className="history">История транзакций</div>
-          <div className="get_mony">Вывод средств</div>
+          <img src={convertpcturepath} alt="" />
+          <div className="get_achiv">Указать полученный сертифкат</div>
         </div>
       </div>
-      <div className="achiv_lk" />
+      <div className="achiv_lk">
+        <div className="achiv">
+          <div className="img_achiv" />
+          <div className="title_achiv">За курсеру</div>
+        </div>
+      </div>
     </div>
   );
 }

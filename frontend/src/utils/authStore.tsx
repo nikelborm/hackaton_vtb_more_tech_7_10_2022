@@ -174,6 +174,13 @@ function setTokenPair(tokenPair: AuthTokenPairDTO | null): void {
   );
 }
 
+setTokenPair({
+  accessToken:
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXNzaW9uVVVJRCI6IjEyMzQ1Njc4OTAiLCJ1c2VyIjp7ImlkIjoxMjN9fQ.smJFD1t3LyPvSd2HAT09_se_cWlJ65CmUl1Xtc7TEM8',
+  refreshToken:
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXNzaW9uVVVJRCI6IjEyMzQ1Njc4OTAiLCJ1c2VyIjp7ImlkIjoxMjN9fQ.smJFD1t3LyPvSd2HAT09_se_cWlJ65CmUl1Xtc7TEM8',
+});
+
 function getLastSavedSession() {
   return convertTokenPairToSession(getLastSavedTokenPair());
 }
