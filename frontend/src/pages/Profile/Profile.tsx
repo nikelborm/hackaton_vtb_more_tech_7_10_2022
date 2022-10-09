@@ -32,7 +32,7 @@ export function Profile() {
         <div className="exp_name">
           <div className="up_name">
             <h2 className="name_lk">Женя Пирог</h2>
-            <div className="balans">Счет {balance}</div>
+            <div className="balans">Счет {balance?.maticAmount}</div>
             <img src={imglkpcturepath} alt="" />
           </div>
           <div className="exp_lk">
@@ -51,8 +51,13 @@ export function Profile() {
       <div className="achiv_lk">
         <div className="achiv">
           <div className="img_achiv" />
-          {nfts.map((i) => (
-            <div className="title_achiv">{i.asd}</div>
+          {nfts?.map((i) => (
+            <div className="block_achiv">
+              <div className="title_achiv">{i.certificateContent.name}</div>
+              <div className="title_achiv">
+                {i.certificateContent.description}
+              </div>
+            </div>
           ))}
         </div>
       </div>

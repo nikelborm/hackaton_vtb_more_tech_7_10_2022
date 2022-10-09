@@ -54,7 +54,7 @@ export function Main() {
       </div>
       <div className="midle_block">
         <div className="users_block">
-          {users.map((user) => (
+          {users?.map((user) => (
             <div className="user">
               <div className="up_user">
                 <div className="img_user">
@@ -64,8 +64,10 @@ export function Main() {
 
               <div className="bottom_user">
                 <div className="title_user">
-                  <div className="name_user">{user.name}</div>
-                  <div className="rol_user">{user.rol}</div>
+                  <div className="name_user">
+                    {user.firstName} {user.firstName}
+                  </div>
+                  <div className="rol_user">Killer</div>
                 </div>
                 <div className="donat_user">
                   <img src={donatepicturepath} alt="" />
