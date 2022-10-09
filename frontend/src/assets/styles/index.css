@@ -28,53 +28,62 @@ body {
   gap: 38px;
 }
 .actives_block {
-  background-color: beige;
+  background-color: #efefef;
   padding-top: 14px;
   padding-bottom: 14px;
+  border-radius: 10px;
   display: flex;
   justify-content: center;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 .active {
   height: 171px;
   width: 243px;
-  background-color: aqua;
+  background-color: #d7e7ff;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   border-radius: 8px;
+  cursor: pointer;
   gap: 11px;
+}
+.left {
+  transform: rotate(180deg);
 }
 .img_active {
   height: 118px;
-  background-color: rgb(187, 127, 255);
   width: 220px;
+}
+.img_active img {
+  height: 100%;
+  width: 100%;
   border-radius: 8px;
 }
-
 .text_active {
   display: flex;
   justify-content: space-between;
   width: 215px;
 }
 .title_active {
-  border: 1px black solid;
-  border-radius: 4px;
   padding: 1.9px;
 }
 .cost {
-  border: 1px black solid;
   padding: 1.5px;
-  border-radius: 4px;
+  display: flex;
+  gap: 5px;
 }
 .users_block {
   height: 500px;
-  background-color: beige;
+  background: #f2f2f2;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
   padding: 36px 50px;
   display: flex;
-  gap: 54px;
+  gap: 49px;
   flex-wrap: wrap;
   overflow: auto;
+  width: 1058px;
 }
 .user {
   display: flex;
@@ -83,7 +92,15 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: aqua;
+  background: #d7e7ff;
+  border-radius: 8px;
+  justify-content: space-evenly;
+}
+.rol_user {
+  font-size: 13px;
+}
+.donat_user img {
+  cursor: pointer;
 }
 .lvl_user {
   position: absolute;
@@ -140,6 +157,38 @@ body {
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+.midle_block {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+.foto_goal button {
+  width: 115px;
+  height: 45px;
+  background: #457ecc;
+  box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  color: #f2f2f2;
+}
+.img_achiv {
+  width: 100px;
+  height: 100px;
+  background-color: rgb(85, 179, 179);
+}
+.get_achiv {
+  width: 319px;
+  height: 57px;
+  background: #457ecc;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  color: #f2f2f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
 #root {
