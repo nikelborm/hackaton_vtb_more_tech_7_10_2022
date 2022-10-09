@@ -1,17 +1,15 @@
-/* eslint-disable prettier/prettier */
 import { useMutation } from 'react-query';
-import { TokenPairDTO, CreateUserDTO } from 'backendTypes';
-import { customFetch, useTokenPairUpdater } from 'utils';
+import { RegisterUserResponseDTO, CreateUserDTO } from 'backendTypes';
+import { customFetch } from 'utils';
 
 export function useRegistrationMutation() {
-  const { updateTokenPair } = useTokenPairUpdater();
-  const { mutate, isLoading, isError, isSuccess } = useMutation(
+  const { mutate, isLoading, isError, isSuccess, data } = useMutation(
     (user: CreateUserDTO) =>
-    customFetch<TokenPairDTO>('auth/local/register', {
-      method: 'POST',
-      needsAccessToken: false,
-      body: user,
-    }).then(updateTokenPair),
+      customFetch<RegisterUserResponseDTO>('auth/local/register', {
+        method: 'POST',
+        needsAccessToken: false,
+        body: user,
+      }),
   );
-  return { sendRegistrationQuery: mutate, isLoading, isError, isSuccess };
+  return { sendRegistrationQuery: mutate, isLoading, isError, isSuccess, data };
 }

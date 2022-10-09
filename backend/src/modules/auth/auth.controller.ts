@@ -7,7 +7,7 @@ import {
   RefreshTokenDTO,
   UserAuthInfo,
   AuthTokenPairDTO,
-  RegisterUserDTO,
+  RegisterUserResponseDTO,
 } from 'src/types';
 import { AuthUseCase } from './services';
 import { LocalAuthGuard } from './guards';
@@ -31,7 +31,7 @@ export class AuthController {
   async register(
     @ValidatedBody
     createUserDTO: CreateUserDTO,
-  ): Promise<RegisterUserDTO> {
+  ): Promise<RegisterUserResponseDTO> {
     return await this.authUseCase.registerNewUserAndLogin(createUserDTO);
   }
 

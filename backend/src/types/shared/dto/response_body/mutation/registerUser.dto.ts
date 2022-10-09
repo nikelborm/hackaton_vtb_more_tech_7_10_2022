@@ -1,7 +1,8 @@
 import { WalletPrivatePublicKeyPair } from '../../../walletPrivatePublicKeyPair.dto';
 import { AuthTokenPairDTO } from '../../../authTokenPair.dto';
 
-export class RegisterUserDTO {
+export class RegisterUserResponseDTO {
   walletPrivatePublicKeyPair!: WalletPrivatePublicKeyPair;
+
   authTokenPair!: AuthTokenPairDTO;
 }

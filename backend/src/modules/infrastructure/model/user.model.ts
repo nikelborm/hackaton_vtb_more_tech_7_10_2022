@@ -42,6 +42,12 @@ export class User {
   salt!: string;
 
   @Column({
+    name: 'public_key',
+    nullable: false,
+  })
+  publicKey!: string;
+
+  @Column({
     name: 'private_key_hash',
     select: false,
     nullable: false,

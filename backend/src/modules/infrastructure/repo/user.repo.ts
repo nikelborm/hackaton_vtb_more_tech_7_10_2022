@@ -121,6 +121,7 @@ export class UserRepo {
         'user.id',
         'user.email',
         'user.firstName',
+        'user.publicKey',
         'user.lastName',
         'user.patronymic',
         'user.gender',

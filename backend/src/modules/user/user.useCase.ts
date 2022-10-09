@@ -10,6 +10,7 @@ import {
   IAppConfigMap,
   PG_UNIQUE_CONSTRAINT_VIOLATION,
   CreateOneUserResponse,
+  WalletPrivatePublicKeyPair,
 } from 'src/types';
 import { isQueryFailedError } from 'src/tools';
 import { FinanceUseCase } from '../finance';
@@ -40,7 +41,7 @@ export class UserUseCase {
 
   async createUser(user: CreateUserDTO): Promise<CreateOneUserResponse> {
     let userWithoutSensitiveDataWithId: InsertedUserWithIdDTO;
-    const { privateKey, publicKey } = await this.financeUseCase.createWallet();
+    const walletPrivatePublicKeyPair = await this.financeUseCase.createWallet();
     try {
       userWithoutSensitiveDataWithId = (({
         privateKeyHash,
@@ -48,10 +49,7 @@ export class UserUseCase {
         ...rest
       }): InsertedUserWithIdDTO => rest)(
         await this.userRepo.createOneWithRelations(
-          this.createUserModel({
-            ...user,
-            privateKey,
-          }),
+          this.createUserModel(user, walletPrivatePublicKeyPair),
         ),
       );
     } catch (error: any) {
@@ -63,22 +61,18 @@ export class UserUseCase {
 
     return {
       user: userWithoutSensitiveDataWithId,
-      walletPrivatePublicKeyPair: {
-        privateKey,
-        publicKey,
-      },
+      walletPrivatePublicKeyPair,
     };
   }
 
-  private createUserModel({
-    privateKey,
-    ...rest
-  }: CreateUserDTO & {
-    privateKey: string;
-  }): UserModelToInsert {
+  private createUserModel(
+    restUser: CreateUserDTO,
+    { privateKey, publicKey }: WalletPrivatePublicKeyPair,
+  ): UserModelToInsert {
     const salt = randomBytes(64).toString('hex');
     return {
-      ...rest,
+      ...restUser,
+      publicKey,
       salt,
       privateKeyHash: createHash('sha256')
         .update(salt)
@@ -96,4 +90,5 @@ export class UserUseCase {
 type UserModelToInsert = CreateUserDTO & {
   salt: string;
   privateKeyHash: string;
+  publicKey: string;
 };

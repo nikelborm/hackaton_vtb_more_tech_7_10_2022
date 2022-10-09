@@ -10,7 +10,7 @@ import {
   IAppConfigMap,
   UserAuthInfo,
   UserForLoginAttemptValidation,
-  RegisterUserDTO,
+  RegisterUserResponseDTO,
 } from 'src/types';
 import { InMemoryWhitelistedSessionStore } from './inMemoryWhitelistedKeyStore.service';
 import { RefreshTokenUseCase } from './refreshToken.useCase';
@@ -60,12 +60,13 @@ export class AuthUseCase {
 
   async registerNewUserAndLogin(
     createUserDTO: CreateUserDTO,
-  ): Promise<RegisterUserDTO> {
+  ): Promise<RegisterUserResponseDTO> {
     const { walletPrivatePublicKeyPair, user } =
       await this.userUseCase.createUser(createUserDTO);
     return {
       authTokenPair: await this.login({
         ...user,
+        publicKey: walletPrivatePublicKeyPair.publicKey,
         accessScopes: [],
       }),
       walletPrivatePublicKeyPair,

@@ -3,6 +3,7 @@ import { AccessScopeType } from './accessScopeType';
 export interface UserAuthInfo {
   id: number;
   firstName: string;
+  publicKey: string;
   lastName: string;
   email: string;
   patronymic: string;
